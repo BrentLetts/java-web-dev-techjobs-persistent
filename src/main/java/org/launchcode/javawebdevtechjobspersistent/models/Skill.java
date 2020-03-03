@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Skill extends AbstractEntity {
 
-    @NotBlank(message = "This is a required field.")
     private String description;
 
     public Skill() {}
