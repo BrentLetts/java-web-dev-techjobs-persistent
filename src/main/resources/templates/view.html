@@ -3,11 +3,12 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container  body-content">
-<h1 th:text="${'Job: ' + job.name}">Default Title</h1>
+<!--<h1 th:text="${'Job: ' + job.name}">Default Title</h1>-->
+<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
 <nav th:replace="fragments :: page-header"></nav>
 
-<div class="job-listing">
+<div class="job-listing" th:if="${job != null}">
     <p th:text="${'ID: ' + job.id}"></p>
     <p th:text="${'Name: ' + job.name}"></p>
     <p>
