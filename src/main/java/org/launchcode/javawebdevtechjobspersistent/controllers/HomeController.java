@@ -2,9 +2,11 @@ package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.PositionType;
 import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.PositionTypeRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,9 @@ public class HomeController {
     @Autowired
     private SkillRepository skillRepository;
 
+    @Autowired
+    private PositionTypeRepository positionTypeRepository;
+
     @RequestMapping("")
     public String index(Model model) {
 
@@ -44,22 +49,27 @@ public class HomeController {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("positionTypes", positionTypeRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
+
         return "add";
     }
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam int employerId,
-                                    @RequestParam List<Integer> skills) {
+                                    @RequestParam List<Integer> skills,
+                                    @RequestParam int positionTypeId) {
 
         if(!errors.hasErrors()){
             Optional optEmployer = employerRepository.findById(employerId);
             if(optEmployer.isPresent()) {
                 Employer employer = (Employer) optEmployer.get();
                 List<Skill> skillObjs = (List<Skill>)skillRepository.findAllById(skills);
+                PositionType positionType = (PositionType)positionTypeRepository.findById(positionTypeId).get();
                 newJob.setEmployer(employer);
                 newJob.setSkills(skillObjs);
+                newJob.setPositionType(positionType);
                 jobRepository.save(newJob);
             }
             return "redirect:/list";

@@ -9,33 +9,45 @@
 <div class="container body-content">
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
     <h2 class = "centered">View Jobs By Category</h2>
-</div>
+
 
 <table class="centeredTable">
     <tr>
         <th>All</th>
+        <th>Position</th>
         <th>Employer</th>
         <th>Skill</th>
     </tr>
 
     <tr>
         <td>
-            <li>
-                <a th:href="@{/list/jobs(column='All',value='View All')}">View All</a>
-            </li>
+            <ul>
+                <li><a th:href="@{/list/jobs(column='All',value='View All')}">View All</a></li>
+            </ul>
         </td>
         <td>
-            <li th:each="employer : ${employers}">
-                <a th:href="@{/list/jobs(column=employer,value=${employer.name})}" th:text="${employer.name}"></a>
-            </li>
+            <ul>
+                <li th:each="position : ${positionTypes}">
+                    <a th:href="@{/list/jobs(column='positionType', value=${position.name})}" th:text="${position.name}">Position</a>
+                </li>
+            </ul>
         </td>
         <td>
-            <li th:each="skill : ${skills}">
-                <a th:href="@{/list/jobs(column=skill,value=${skill.name})}" th:text="${skill.name}"></a>
-            </li>
+            <ul>
+                <li th:each="employer : ${employers}">
+                    <a th:href="@{/list/jobs(column=employer,value=${employer.name})}" th:text="${employer.name}"></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="skill : ${skills}">
+                    <a th:href="@{/list/jobs(column=skill,value=${skill.name})}" th:text="${skill.name}"></a>
+                </li>
+            </ul>
         </td>
     </tr>
 </table>
-
+</div>
 </body>
 </html>

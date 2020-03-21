@@ -8,6 +8,8 @@ td, th {
 
 th {
     text-align: center;
+    background-color: black;
+    color: white;
 }
 
 td {
@@ -45,22 +47,17 @@ label {
     text-align: center;
 }
 
-p {
-    vertical-align: top;
-    margin-left: 30px;
-}
-
-.centeredTable {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-div.job-listing {
-    border: 1px solid #e4e4e4;
-    width: 80%;
-    background-color: #e4e4e4;
-}
-
 .error{
     color: red;
 }
+
+.box{
+    display: flex;
+    flex-wrap: wrap;
+    align: space-evenly
+}
+
+.box>*{
+    flex: 1 1 50%;
+}
+

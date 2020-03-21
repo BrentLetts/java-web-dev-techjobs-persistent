@@ -1,19 +1,19 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Skill extends AbstractEntity {
+public class PositionType extends AbstractEntity {
 
     private String description;
 
-    @ManyToMany(mappedBy = "skills")
+    @OneToMany(mappedBy = "positionType")
     private List<Job> jobs = new ArrayList<>();
 
-    public Skill() {}
+    public PositionType() {}
 
     public String getDescription() {
         return description;
@@ -23,5 +23,7 @@ public class Skill extends AbstractEntity {
         this.description = description;
     }
 
-    public List<Job> getJobs() { return jobs; }
+    public List<Job> getJobs(){
+        return jobs;
+    }
 }

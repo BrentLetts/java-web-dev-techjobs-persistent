@@ -16,21 +16,37 @@
 
     <div class="form-group">
         <label th:for="employer">Employer</label>
-        <select name="employerId">
-            <option th:each="employer : ${employers}"
-                    th:text="${employer.name}"
-                    th:value="${employer.id}"></option>
-        </select>
+        <div>
+            <select name="employerId">
+                <option th:each="employer : ${employers}"
+                        th:text="${employer.name}"
+                        th:value="${employer.id}"></option>
+            </select>
+        </div>
         <a th:href="@{'/employers/add'}">Add Employers</a>
     </div>
 
     <div class="form-group">
         <label th:for="skills">Skills</label>
-        <th:block th:each="skill : ${skills}">
-            <input type="checkbox" name="skills" th:value="${skill.id}">
-            <label th:text="${skill.name}"></label>
-        </th:block>
+        <div class="box">
+            <div th:each="skill : ${skills}">
+                <input type="checkbox" name="skills" th:value="${skill.id}">
+                <label th:text="${skill.name}"></label>
+            </div>
+        </div>
         <a th:href="@{'/skills/add'}">Add Skills</a>
+    </div>
+
+    <div class="form-group">
+        <label th:for="positionType">Position Type</label>
+        <div>
+            <select name="positionTypeId">
+                <option th:each="position : ${positionTypes}"
+                        th:text="${position.name}"
+                        th:value="${position.id}"></option>
+            </select>
+        </div>
+        <a th:href="@{'/positionType/add'}">Add Position</a>
     </div>
 
     <input type="submit" value="Add Job" />

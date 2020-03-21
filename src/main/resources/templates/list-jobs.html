@@ -11,6 +11,11 @@
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
     <table class="job-listing">
+        <thead>
+            <tr>
+                <th th:text="${'Number of postings: ' + jobs.size()}"></th>
+            </tr>
+        </thead>
         <tr th:each="job : ${jobs}">
             <td>
                 <p>
@@ -29,6 +34,10 @@
                             <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
                         </li>
                     </ul>
+                </p>
+                <p th:if="${job.positionType != null}">
+                    Position:
+                    <a th:href="@{'/positionType/view/' + ${job.positionType.id}}" th:text="${job.positionType.name}"></a>
                 </p>
             </td>
         </tr>

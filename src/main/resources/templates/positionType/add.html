@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container  body-content">
+<h1>Add Skill</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<form method="post" class="container body-content">
+    <div class="form-group">
+        <label th:for="name">Position Name</label>
+        <input class="form-control" th:field="${positionType.name}" />
+        <p class="error" th:errors="${positionType.name}"></p>
+    </div>
+    <div class="form-group">
+        <label th:for="description">Position Description</label>
+        <input class="form-control" th:field="${positionType.description}" />
+        <p class="error" th:errors="${positionType.description}" ></p>
+    </div>
+
+    <input type="submit" value="Add Position" />
+</form>
+
+</body>
+</html>
